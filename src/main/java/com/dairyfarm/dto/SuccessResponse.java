@@ -2,7 +2,7 @@ package com.dairyfarm.dto;
 
 import java.io.Serializable;
 
-import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -24,7 +24,7 @@ public class SuccessResponse implements Serializable {
 
 	private String message;
 
-	private HttpStatus status;
+	private HttpStatusCode status;
 
 	private long savedItemId;
 

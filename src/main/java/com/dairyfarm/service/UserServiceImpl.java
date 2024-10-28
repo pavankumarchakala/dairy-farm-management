@@ -6,13 +6,12 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import javax.transaction.Transactional;
-
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 
 import com.dairyfarm.constant.UserRegistrationConstants;
@@ -53,7 +52,7 @@ public class UserServiceImpl implements UserService {
 		User user = userRepository.save(modelMapper.map(userDTO, User.class));
 
 		if (0 != dairyfarmId) {
-			Dairyfarm dairyfarm = dairyfarmRepository.getById(dairyfarmId);
+			Dairyfarm dairyfarm = dairyfarmRepository.findById(dairyfarmId).get();
 			dairyfarmUserRepository
 					.save(DFUser.builder().dairyfarm(dairyfarm).status(Status.ACTIVE).user(user).build());
 		}
@@ -65,7 +64,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	@Transactional
 	public ResponseEntity<SuccessResponse> updateUser(UserDTO userDTO) throws DairyfarmmanagementException {
-		User user = userRepository.getById(userDTO.getId());
+		User user = userRepository.findById(userDTO.getId()).get();
 		modelMapper.map(userDTO, user);
 		return new ResponseEntity<SuccessResponse>(
 				SuccessResponse.builder().message("User Successfully updated.").status(HttpStatus.OK).build(),
@@ -75,7 +74,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	@Transactional
 	public ResponseEntity<UserDTO> fetchUserDetails(long userId) throws DairyfarmmanagementException {
-		User user = userRepository.getById(userId);
+		User user = userRepository.findById(userId).get();
 		return new ResponseEntity<UserDTO>(modelMapper.map(user, UserDTO.class), HttpStatus.OK);
 	}
 

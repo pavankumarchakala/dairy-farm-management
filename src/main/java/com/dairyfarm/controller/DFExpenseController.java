@@ -1,7 +1,5 @@
 package com.dairyfarm.controller;
 
-import javax.websocket.server.PathParam;
-
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.web.PageableDefault;
@@ -38,59 +36,40 @@ public class DFExpenseController {
 	private final DFExpenseService dairyfarmExpenseService;
 
 	@Operation(summary = "Add Dairyfarm Expense", description = "Add Dairyfarm Expense details")
-	@ApiResponses({ @ApiResponse(
-			content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE),
-			responseCode = "201",
-			description = "Dairyfarm Expense record created successfully") })
-	@PostMapping(
-			value = "/add",
-			consumes = MediaType.APPLICATION_JSON_VALUE,
-			produces = MediaType.APPLICATION_JSON_VALUE)
+	@ApiResponses({
+			@ApiResponse(content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE), responseCode = "201", description = "Dairyfarm Expense record created successfully") })
+	@PostMapping(value = "/add", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<SuccessResponse> addDFExpense(@RequestBody DFExpenseDTO dairyfarmExpenseDTO) {
 		return dairyfarmExpenseService.addDFExpense(dairyfarmExpenseDTO);
 	}
 
 	@Operation(summary = "Update Dairyfarm Expense details", description = "Update Dairyfarm Expense details")
-	@ApiResponses({ @ApiResponse(
-			content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE),
-			responseCode = "200",
-			description = "Dairyfarm Expense record updated successfully") })
-	@PutMapping(
-			value = "/update",
-			consumes = MediaType.APPLICATION_JSON_VALUE,
-			produces = MediaType.APPLICATION_JSON_VALUE)
+	@ApiResponses({
+			@ApiResponse(content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE), responseCode = "200", description = "Dairyfarm Expense record updated successfully") })
+	@PutMapping(value = "/update", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<SuccessResponse> updateDFExpense(@RequestBody DFExpenseDTO dairyfarmExpenseDTO) {
 		return dairyfarmExpenseService.updateDFExpense(dairyfarmExpenseDTO);
 	}
 
 	@Operation(summary = "Fetch Dairyfarm Expense", description = "Fetch Dairyfarm Expense details")
-	@ApiResponses({ @ApiResponse(
-			content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE),
-			responseCode = "200",
-			description = "Fetch Dairyfarm Expense details") })
-	@PutMapping(
-			value = "/{expenseId}",
-			consumes = MediaType.APPLICATION_JSON_VALUE,
-			produces = MediaType.APPLICATION_JSON_VALUE)
+	@ApiResponses({
+			@ApiResponse(content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE), responseCode = "200", description = "Fetch Dairyfarm Expense details") })
+	@PutMapping(value = "/{expenseId}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<DFExpenseDTO> fetchDFExpenseDetails(@PathVariable("expenseId") long expenseId) {
 		return dairyfarmExpenseService.fetchDFExpenseDetails(expenseId);
 	}
 
 	@Operation(summary = "Delete Dairyfarm Expense record", description = "Delete Dairyfarm Expense record details")
-	@ApiResponses({ @ApiResponse(
-			content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE),
-			responseCode = "201",
-			description = "Dairyfarm Expense record created successfully") })
+	@ApiResponses({
+			@ApiResponse(content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE), responseCode = "201", description = "Dairyfarm Expense record created successfully") })
 	@DeleteMapping(value = "/delete/{expenseId}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<SuccessResponse> updateDFExpense(@PathParam("expenseId") long expenseId) {
+	public ResponseEntity<SuccessResponse> updateDFExpense(@PathVariable("expenseId") long expenseId) {
 		return dairyfarmExpenseService.deleteDFExpense(expenseId);
 	}
 
 	@Operation(summary = "Fetch Dairyfarm Expense", description = "Fetch Dairyfarm Expense records")
-	@ApiResponses({ @ApiResponse(
-			content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE),
-			responseCode = "200",
-			description = "Fetch Dairyfarm Expense records") })
+	@ApiResponses({
+			@ApiResponse(content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE), responseCode = "200", description = "Fetch Dairyfarm Expense records") })
 	@GetMapping(value = "/all/{dairyfarmId}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<PaginatedResponse<DFExpenseDTO>> fetchDFExpenses(
 			@PageableDefault(page = 0, size = 10, sort = "paidDate", direction = Direction.DESC) Pageable pageable,

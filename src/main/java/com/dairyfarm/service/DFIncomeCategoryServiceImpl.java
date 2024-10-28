@@ -2,12 +2,11 @@ package com.dairyfarm.service;
 
 import java.util.Optional;
 
-import javax.transaction.Transactional;
-
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.dairyfarm.dao.DFIncomeCategoryRepository;
 import com.dairyfarm.dao.DFIncomeRepository;

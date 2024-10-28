@@ -1,11 +1,10 @@
 package com.dairyfarm.service;
 
-import javax.transaction.Transactional;
-
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.dairyfarm.dao.DFUserRepository;
 import com.dairyfarm.dto.DFUserDTO;

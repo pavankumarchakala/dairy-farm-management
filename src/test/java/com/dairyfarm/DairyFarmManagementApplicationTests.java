@@ -8,6 +8,7 @@ class DairyFarmManagementApplicationTests {
 
 	@Test
 	void contextLoads() {
+		System.out.println("Testing");
 	}
 
 }
